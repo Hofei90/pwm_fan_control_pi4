@@ -2,7 +2,14 @@
 
 __Achtung, das ist bisher nur ein sehr rudimentäre Code, weitere geplanten Features siehe unter Projekte__
 
-## Vorbereitungen
+## Hardware
+Die Hardwareverkabelung ist unter dem Ordner doc zu finden.
+Es ist zu empfehlen einen CMOS Konverter in die PWM Leitung einzubauen. Der Einfachheit zu Liebe, habe ich jedoch darauf 
+verzichtet.
+Die Signalleitung beanspruchte  bei Direktanschluss bei mir 255,5 µA. Keine Garantie aber, dass der Pi nicht doch
+schaden deswegen nehmen kann.
+
+## Vorbereitungen Software
 ### Installation pigpio
 Zunächst muss pigpio manuell installiert werden, da in dem Repository eine zu alte Version enthalten ist, welche nicht
 mit dem Raspberry Pi 4 und Buster funktionierte.
