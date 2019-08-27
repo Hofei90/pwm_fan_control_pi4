@@ -1,2 +1,38 @@
 # pwm_fan_control_pi4
-Software zur Steuerung eines PWM Lüfters für Betrieb mit dem Raspberry Pi 4
+
+__Achtung, das ist bisher nur ein sehr rudimentäre Code, weitere geplanten Features siehe unter Projekte__
+
+## Vorbereitungen
+### Installation pigpio
+Zunächst muss pigpio manuell installiert werden, da in dem Repository eine zu alte Version enthalten ist, welche nicht
+mit dem Raspberry Pi 4 und Buster funktionierte.
+
+Meine pigpio Version: 70
+
+Installiert nach Methode 2 auf folgender offiziellen Seite: http://abyz.me.uk/rpi/pigpio/download.html
+
+### Installation Pythonmodule
+`pip3 install --user toml`
+
+### Configdatei anpassen
+Das Verhalten des Lüfters lässt sich in der Datei `config.toml` definieren und wenn gewünscht anpassen. 
+   
+## Einrichtung Autostart
+Die im Ordner enthaltenden *.service Files nach /etc/systemd/system kopieren.
+
+Die Pfade in den Files sind ggf. der Umgebung anzupassen
+
+Rechte der Systemd Files anpassen
+
+`chown root:root /etc/systemd/system/fan_control.service /etc/systemd/system/pigpiod.service`
+
+`chmod 644 /etc/systemd/system/fan_control.service /etc/systemd/system/pigpiod.service`
+
+Anschließend händisch testen, nach Ausführen des Befehls sollte das Skript gestartet sein, überprüfbar z.B mit htop
+
+`systemctl start fan_control.service`
+
+Funktioniert alles wie gewünscht wird mit folgendem Befehl der Autostart aktiviert
+
+`systemctl enable fan_control.service`
+
