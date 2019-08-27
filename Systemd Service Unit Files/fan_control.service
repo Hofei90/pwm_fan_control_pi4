@@ -1,0 +1,12 @@
+[Unit]
+Description=fan_control starten
+Requires=pigpiod.service
+After=pigpiod.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/fan_control.py
+User=pi
+
+[Install]
+WantedBy=multi-user.target

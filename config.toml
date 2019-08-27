@@ -1,0 +1,3 @@
+# Index 0 = Temperatur
+# Index 1 = PWM Duty Cycle Wert
+pwm = [[0, 0], [55, 10], [60, 30], [65, 50], [70, 70], [75, 90], [80, 100]]

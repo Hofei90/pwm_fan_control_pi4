@@ -1,0 +1,9 @@
+[Unit]
+Description=pigpio daemon starten
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/pigpiod
+
+[Install]
+WantedBy=multi-user.target
