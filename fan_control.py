@@ -52,7 +52,7 @@ class Tacho:
         print(messung / 2 * 60)
 
 
-def myround(x, base=SCHRITTWEITE):
+def round_temperature(x, base=SCHRITTWEITE):
     return base * round(x / base)
 
 
@@ -86,14 +86,15 @@ def main():
         while (datetime.datetime.now() - tacho.startzeit).total_seconds() < 1:
             time.sleep(0.02)
         tacho.stop_frequenzzaehlung()
-        temperatur = read_temperature()
-        round_temperatur = myround(temperatur)
-        new_dutycycle = temperatures_dutycycles[round_temperatur]
+        temperature = read_temperature()
+        temperature_rounded = round_temperature(temperature)
+        new_dutycycle = temperatures_dutycycles[temperature_rounded]
         if new_dutycycle != PWM_FAN.value * 100:
             if new_dutycycle == 0:
-                round_temperatur = myround(round_temperatur + ON_OFF_HYSTERESE)
-            set_pwm_speed(temperatures_dutycycles[round_temperatur])
-        print(f"Temperatur: {temperatur}, {round_temperatur}, DutyCycle: {PWM_FAN.value * 100}%")
+                temperature_rounded = round_temperature(temperature_rounded + ON_OFF_HYSTERESE)
+            set_pwm_speed(temperatures_dutycycles[temperature_rounded])
+        # TODO: Logging einbauen
+        # print(f"Temperatur: {temperature}, {temperature_rounded}, DutyCycle: {PWM_FAN.value * 100}%")
         time.sleep(3)
 
 
