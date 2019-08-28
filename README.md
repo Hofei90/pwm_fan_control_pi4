@@ -1,6 +1,6 @@
 # pwm_fan_control_pi4
 
-__Achtung, das ist bisher nur ein sehr rudimentäre Code, weitere geplanten Features siehe unter Projekte__
+__Achtung, das ist bisher nur ein sehr rudimentärer Code, weitere geplanten Features siehe unter Projekte__
 
 ## Hardware
 Die Hardwareverkabelung ist unter dem Ordner doc zu finden.
@@ -10,6 +10,9 @@ Die Signalleitung beanspruchte  bei Direktanschluss bei mir 255,5 µA. Keine Gar
 schaden deswegen nehmen kann.
 
 ## Vorbereitungen Software
+### Python
+Das Skript benötigt Python >=3.6
+
 ### Installation pigpio
 Zunächst muss pigpio manuell installiert werden, da in dem Repository eine zu alte Version enthalten ist, welche nicht
 mit dem Raspberry Pi 4 und Buster funktionierte.
@@ -20,6 +23,8 @@ Installiert nach Methode 2 auf folgender offiziellen Seite: http://abyz.me.uk/rp
 
 ### Installation Pythonmodule
 `pip3 install --user toml`
+
+`pip3 install --user gpiozero`
 
 ### Configdatei anpassen
 Das Verhalten des Lüfters lässt sich in der Datei `config.toml` definieren und wenn gewünscht anpassen. 
