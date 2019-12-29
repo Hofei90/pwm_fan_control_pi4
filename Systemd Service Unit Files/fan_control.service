@@ -5,7 +5,7 @@ After=pigpiod.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/pi/fan_control.py
+ExecStart=/usr/bin/python3 /home/pi/pwm_fan_control_pi4/fan_control.py
 User=pi
 
 [Install]
