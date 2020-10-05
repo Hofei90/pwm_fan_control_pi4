@@ -6,8 +6,8 @@ import gpiozero
 import toml
 from gpiozero.pins.pigpio import PiGPIOFactory
 
-SCHRITTWEITE = 5
-ON_OFF_HYSTERESE = 5
+STEP_WIDTH = 5
+ON_OFF_HYSTERESIS = 5
 SKRIPTPFAD = os.path.abspath(os.path.dirname(__file__))
 factory = PiGPIOFactory()
 PWM_FAN = gpiozero.PWMOutputDevice(18, pin_factory=factory)
@@ -26,45 +26,45 @@ CONFIG = load_config()
 
 class Tacho:
     def __init__(self):
-        self.startzeit = None
-        self.messung = 0
-        self.messung_old = datetime.datetime.now()
+        self.startTime = None
+        self.currentMeasurement = 0
+        self.lastMeasurement = datetime.datetime.now()
 
-    def start_frequenzzaehlung(self):
-        TACHO_PIN.when_pressed = self.zaehler_erhoehen
-        self.startzeit = datetime.datetime.now()
+    def frequenceCounter_start(self):
+        TACHO_PIN.when_pressed = self.counter_increment
+        self.startTime = datetime.datetime.now()
 
-    def stop_frequenzzaehlung(self):
+    def frequenceCounter_stop(self):
         TACHO_PIN.when_pressed = None
-        self.ergebnisse_auswerten()
+        self.process_results()
 
-    def zaehler_erhoehen(self):
+    def counter_increment(self):
         now = datetime.datetime.now()
-        self.messung = (now - self.messung_old).total_seconds()
-        self.messung_old = now
+        self.currentMeasurement = (now - self.lastMeasurement).total_seconds()
+        self.lastMeasurement = now
 
-    def ergebnisse_auswerten(self):
+    def process_results(self):
         try:
-            messung = 1 / self.messung
+            currentMeasurement = 1 / self.currentMeasurement
         except ZeroDivisionError:
-            messung = 0
-        print(f"Messung: {messung}")
-        print(messung / 2 * 60)
+            currentMeasurement = 0
+        print(f"Measurement: {currentMeasurement}")
+        print(currentMeasurement / 2 * 60)
 
 
-def round_temperature(x, base=SCHRITTWEITE):
+def round_temperature(x, base=STEP_WIDTH):
     return base * round(x / base)
 
 
 def generate_all_temperatures_dutycycles(temperatures_dutycycles):
     last_data = 0
     all_temperatures_dutycycles = {}
-    for temperatur in range(0, 100 + SCHRITTWEITE, SCHRITTWEITE):
-        if temperatur in temperatures_dutycycles:
-            all_temperatures_dutycycles[temperatur] = temperatures_dutycycles[temperatur]
-            last_data = temperatures_dutycycles[temperatur]
+    for temperature in range(0, 100 + STEP_WIDTH, STEP_WIDTH):
+        if temperature in temperatures_dutycycles:
+            all_temperatures_dutycycles[temperature] = temperatures_dutycycles[temperature]
+            last_data = temperatures_dutycycles[temperature]
         else:
-            all_temperatures_dutycycles[temperatur] = last_data
+            all_temperatures_dutycycles[temperature] = last_data
     return all_temperatures_dutycycles
 
 
@@ -82,16 +82,16 @@ def main():
     temperatures_dutycycles = generate_all_temperatures_dutycycles(temperatures_dutycycles)
     while True:
         tacho = Tacho()
-        tacho.start_frequenzzaehlung()
-        while (datetime.datetime.now() - tacho.startzeit).total_seconds() < 1:
+        tacho.frequenceCounter_start()
+        while (datetime.datetime.now() - tacho.startTime).total_seconds() < 1:
             time.sleep(0.02)
-        tacho.stop_frequenzzaehlung()
+        tacho.frequenceCounter_stop()
         temperature = read_temperature()
         temperature_rounded = round_temperature(temperature)
         new_dutycycle = temperatures_dutycycles[temperature_rounded]
         if new_dutycycle != PWM_FAN.value * 100:
             if new_dutycycle == 0:
-                temperature_rounded = round_temperature(temperature_rounded + ON_OFF_HYSTERESE)
+                temperature_rounded = round_temperature(temperature_rounded + ON_OFF_HYSTERESIS)
             set_pwm_speed(temperatures_dutycycles[temperature_rounded])
         # TODO: Logging einbauen
         # print(f"Temperatur: {temperature}, {temperature_rounded}, DutyCycle: {PWM_FAN.value * 100}%")
