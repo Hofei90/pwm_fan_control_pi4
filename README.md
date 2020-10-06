@@ -1,50 +1,47 @@
-# pwm_fan_control_pi4
+# PWM Fan Control for Raspberry Pi 4
 
-__Achtung, das ist bisher nur ein sehr rudimentärer Code, weitere geplanten Features siehe unter Projekte__
+__Beware, this is a rudimentairy implementation. Further features are planned, see 'Projekte'__
 
 ## Hardware
-Die Hardwareverkabelung ist unter dem Ordner doc zu finden.
-Es ist zu empfehlen einen CMOS Konverter in die PWM Leitung einzubauen. Der Einfachheit zu Liebe, habe ich jedoch darauf 
-verzichtet.
-Die Signalleitung beanspruchte  bei Direktanschluss bei mir 255,5 µA. Keine Garantie aber, dass der Pi nicht doch
-schaden deswegen nehmen kann.
+A hardware schematic could be found in the folder 'doc'
+It is recommended to use a CMOS converter for the PWM line.
+To keep it easy this converter is currently not part of the schematic.
+Is the signal line used without converter the measured current was for me 255,5µA.
+There is no guarntee that the Raspberry Pi will not destroyed (may over time).
 
-## Vorbereitungen Software
+## Software prepration
 ### Python
-Das Skript benötigt Python >=3.6
+The scripts requires Python >= 3.6
 
 ### Installation pigpio
-Zunächst muss pigpio manuell installiert werden, da in dem Repository eine zu alte Version enthalten ist, welche nicht
-mit dem Raspberry Pi 4 und Buster funktionierte.
+A manually installtion is required due to a old version in the repository is available which will not works with Raspberry Pi 4 and Buster.
 
-Meine pigpio Version: 70
+Used pigpio Version: 70
 
-Installiert nach Methode 2 auf folgender offiziellen Seite: http://abyz.me.uk/rpi/pigpio/download.html
+For installation it can be used 'Method 2' form the official home page: http://abyz.me.uk/rpi/pigpio/download.html
 
-### Installation Pythonmodule
+### Installation Python modules
 `pip3 install --user toml`
 
 `pip3 install --user gpiozero`
 
-### Configdatei anpassen
-Das Verhalten des Lüfters lässt sich in der Datei `config.toml` definieren und wenn gewünscht anpassen. 
-   
-## Einrichtung Autostart
-Die im Ordner enthaltenden *.service Files nach /etc/systemd/system kopieren.
+### Config file modifications
+The desired fan behaviour could be defined via the file `config.toml`.
 
-Die Pfade in den Files sind ggf. der Umgebung anzupassen
+## Setup Autostart
+Copy all files (.service) from folder 'Systemd Service Unit Files' to /etc/systemd/system.
 
-Rechte der Systemd Files anpassen
+If the fan controller python script are NOT located in '/home/pi/pwm_fan_control_pi4/' the .service-files must be adjusted!
+
+Modfiy the access rights for the systmd files as following
 
 `chown root:root /etc/systemd/system/fan_control.service /etc/systemd/system/pigpiod.service`
 
 `chmod 644 /etc/systemd/system/fan_control.service /etc/systemd/system/pigpiod.service`
 
-Anschließend händisch testen, nach Ausführen des Befehls sollte das Skript gestartet sein, überprüfbar z.B mit htop
-
+## Test
+Execute the following command and check with top or htop that the service is running
 `systemctl start fan_control.service`
 
-Funktioniert alles wie gewünscht wird mit folgendem Befehl der Autostart aktiviert
-
+If everything works as expected enable the autostart for the fan controller
 `systemctl enable fan_control.service`
-
