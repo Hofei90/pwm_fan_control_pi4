@@ -1,6 +1,6 @@
 # PWM Fan Control for Raspberry Pi 4
 
-__Beware, this is a rudimentairy implementation. Further features are planned, see 'Projekte'__
+__Beware, this is a rudimentairy implementation. Further features are planned, see 'GitHub Project Board'__
 
 ## Hardware
 A hardware schematic could be found in the folder 'doc'
@@ -29,7 +29,7 @@ For installation it can be used 'Method 2' form the official home page: http://a
 The desired fan behaviour could be defined via the file `config.toml`.
 
 ## Setup Autostart
-Copy all files (.service) from folder 'Systemd Service Unit Files' to /etc/systemd/system.
+Copy all files (\*.service) from folder 'Systemd Service Unit Files' to /etc/systemd/system.
 
 If the fan controller python script are NOT located in '/home/pi/pwm_fan_control_pi4/' the .service-files must be adjusted!
 
