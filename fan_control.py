@@ -26,30 +26,30 @@ CONFIG = load_config()
 
 class Tacho:
     def __init__(self):
-        self.startTime = None
-        self.currentMeasurement = 0
-        self.lastMeasurement = datetime.datetime.now()
+        self.start_time = None
+        self.current_measurement = 0
+        self.last_measurement = datetime.datetime.now()
 
-    def frequenceCounter_start(self):
+    def frequence_counter_start(self):
         TACHO_PIN.when_pressed = self.counter_increment
-        self.startTime = datetime.datetime.now()
+        self.start_time = datetime.datetime.now()
 
-    def frequenceCounter_stop(self):
+    def frequence_counter_stop(self):
         TACHO_PIN.when_pressed = None
         self.process_results()
 
     def counter_increment(self):
         now = datetime.datetime.now()
-        self.currentMeasurement = (now - self.lastMeasurement).total_seconds()
-        self.lastMeasurement = now
+        self.current_measurement = (now - self.last_measurement).total_seconds()
+        self.last_measurement = now
 
     def process_results(self):
         try:
-            currentMeasurement = 1 / self.currentMeasurement
+            current_measurement = 1 / self.current_measurement
         except ZeroDivisionError:
-            currentMeasurement = 0
-        print(f"Measurement: {currentMeasurement}")
-        print(currentMeasurement / 2 * 60)
+            current_measurement = 0
+        print(f"Measurement: {current_measurement}")
+        print(current_measurement / 2 * 60)
 
 
 def round_temperature(x, base=STEP_WIDTH):
@@ -82,10 +82,10 @@ def main():
     temperatures_dutycycles = generate_all_temperatures_dutycycles(temperatures_dutycycles)
     while True:
         tacho = Tacho()
-        tacho.frequenceCounter_start()
-        while (datetime.datetime.now() - tacho.startTime).total_seconds() < 1:
+        tacho.frequence_counter_start()
+        while (datetime.datetime.now() - tacho.start_time).total_seconds() < 1:
             time.sleep(0.02)
-        tacho.frequenceCounter_stop()
+        tacho.frequence_counter_stop()
         temperature = read_temperature()
         temperature_rounded = round_temperature(temperature)
         new_dutycycle = temperatures_dutycycles[temperature_rounded]
