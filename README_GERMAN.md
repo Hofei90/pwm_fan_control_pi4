@@ -1,10 +1,10 @@
-# pwm_fan_control_pi4
+# PWM Fan Control for Raspberry Pi 4
 
-__Achtung, das ist bisher nur ein sehr rudimentärer Code, weitere geplanten Features siehe unter Projekte__
+__Achtung, das ist bisher nur ein sehr rudimentärer Code, weitere geplanten Features siehe unter 'GitHub Project Board'__
 
 ## Hardware
 Die Hardwareverkabelung ist unter dem Ordner doc zu finden.
-Es ist zu empfehlen einen CMOS Konverter in die PWM Leitung einzubauen. Der Einfachheit zu Liebe, habe ich jedoch darauf 
+Es ist zu empfehlen einen CMOS Konverter in die PWM Leitung einzubauen. Der Einfachheit zu Liebe, habe ich jedoch darauf
 verzichtet.
 Die Signalleitung beanspruchte  bei Direktanschluss bei mir 255,5 µA. Keine Garantie aber, dass der Pi nicht doch
 schaden deswegen nehmen kann.
@@ -27,10 +27,10 @@ Installiert nach Methode 2 auf folgender offiziellen Seite: http://abyz.me.uk/rp
 `pip3 install --user gpiozero`
 
 ### Configdatei anpassen
-Das Verhalten des Lüfters lässt sich in der Datei `config.toml` definieren und wenn gewünscht anpassen. 
-   
+Das Verhalten des Lüfters lässt sich in der Datei `config.toml` definieren und wenn gewünscht anpassen.
+
 ## Einrichtung Autostart
-Die im Ordner enthaltenden *.service Files nach /etc/systemd/system kopieren.
+Die im Ordner enthaltenden \*.service Files nach /etc/systemd/system kopieren.
 
 Die Pfade in den Files sind ggf. der Umgebung anzupassen
 
@@ -40,6 +40,7 @@ Rechte der Systemd Files anpassen
 
 `chmod 644 /etc/systemd/system/fan_control.service /etc/systemd/system/pigpiod.service`
 
+## Test
 Anschließend händisch testen, nach Ausführen des Befehls sollte das Skript gestartet sein, überprüfbar z.B mit htop
 
 `systemctl start fan_control.service`
@@ -47,4 +48,3 @@ Anschließend händisch testen, nach Ausführen des Befehls sollte das Skript ge
 Funktioniert alles wie gewünscht wird mit folgendem Befehl der Autostart aktiviert
 
 `systemctl enable fan_control.service`
-
