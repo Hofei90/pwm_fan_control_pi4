@@ -1,6 +1,7 @@
 # PWM Fan Control for Raspberry Pi 4
 
-__Achtung, das ist bisher nur ein sehr rudimentärer Code, weitere geplanten Features siehe unter 'GitHub Project Board'__
+__Achtung, das ist bisher nur ein sehr rudimentärer Code, weitere geplanten Features siehe unter 
+[GitHub Project Board - Features](https://github.com/Hofei90/pwm_fan_control_pi4/projects/1)__
 
 ## Hardware
 Die Hardwareverkabelung ist unter dem Ordner doc zu finden.

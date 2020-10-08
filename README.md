@@ -2,7 +2,8 @@
 
 [Deutsches Readme](https://github.com/Hofei90/pwm_fan_control_pi4/blob/master/README_GERMAN.md)
 
-__Beware, this is a rudimentairy implementation. Further features are planned, see 'GitHub Project Board'__
+__Beware, this is a rudimentairy implementation. Further features are planned, 
+see [GitHub Project Board - Features](https://github.com/Hofei90/pwm_fan_control_pi4/projects/1)__
 
 ## Hardware
 A hardware schematic could be found in the folder 'doc'
