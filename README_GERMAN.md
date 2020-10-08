@@ -23,9 +23,10 @@ Meine pigpio Version: 70
 Installiert nach Methode 2 auf folgender offiziellen Seite: http://abyz.me.uk/rpi/pigpio/download.html
 
 ### Installation Pythonmodule
-`pip3 install --user toml`
+In der requirements.txt sind alle benötigten Pythonmodule enthalten. Alle aufgeführten Module lassen sich mit 
+folgendem Befehl installieren:
 
-`pip3 install --user gpiozero`
+`pip3 install --user -r requirements.txt`
 
 ### Configdatei anpassen
 Das Verhalten des Lüfters lässt sich in der Datei `config.toml` definieren und wenn gewünscht anpassen.

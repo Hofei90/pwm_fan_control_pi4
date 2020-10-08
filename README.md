@@ -24,9 +24,10 @@ Used pigpio Version: 70
 For installation it can be used 'Method 2' form the official home page: http://abyz.me.uk/rpi/pigpio/download.html
 
 ### Installation Python modules
-`pip3 install --user toml`
+The requirements.txt contains all required Python modules. All listed modules can be used with 
+install the following command:
 
-`pip3 install --user gpiozero`
+`pip3 install --user -r requirements.txt`
 
 ### Config file modifications
 The desired fan behaviour could be defined via the file `config.toml`.
