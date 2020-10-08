@@ -1,5 +1,7 @@
 # PWM Fan Control for Raspberry Pi 4
 
+[Deutsches Readme](https://github.com/Hofei90/pwm_fan_control_pi4/blob/master/README_GERMAN.md)
+
 __Beware, this is a rudimentairy implementation. Further features are planned, see 'GitHub Project Board'__
 
 ## Hardware
