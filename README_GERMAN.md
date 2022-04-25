@@ -15,12 +15,11 @@ schaden deswegen nehmen kann.
 Das Skript benötigt Python >=3.6
 
 ### Installation pigpio
-Zunächst muss pigpio manuell installiert werden, da in dem Repository eine zu alte Version enthalten ist, welche nicht
-mit dem Raspberry Pi 4 und Buster funktionierte.
+Getestete pigpio Version: 79
 
-Meine pigpio Version: 70
+Zum Installieren folgenden Befehl ausführen:
 
-Installiert nach Methode 2 auf folgender offiziellen Seite: http://abyz.me.uk/rpi/pigpio/download.html
+`apt update && apt install pigpio python3-pigpio`
 
 ### Installation Pythonmodule
 In der requirements.txt sind alle benötigten Pythonmodule enthalten. Alle aufgeführten Module lassen sich mit 

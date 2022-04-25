@@ -17,11 +17,11 @@ There is no guarntee that the Raspberry Pi will not destroyed (may over time).
 The scripts requires Python >= 3.6
 
 ### Installation pigpio
-A manually installtion is required due to a old version in the repository is available which will not works with Raspberry Pi 4 and Buster.
+Tested pigpio version: 79
 
-Used pigpio Version: 70
+Run the following command to install:
 
-For installation it can be used 'Method 2' form the official home page: http://abyz.me.uk/rpi/pigpio/download.html
+`apt update && apt install pigpio python3-pigpio`.
 
 ### Installation Python modules
 The requirements.txt contains all required Python modules. All listed modules can be used with 
