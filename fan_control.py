@@ -4,12 +4,12 @@ import time
 
 import gpiozero
 import toml
-from gpiozero.pins.pigpio import PiGPIOFactory
+from gpiozero.pins.lgpio import LGPIOFactory
 
 STEP_WIDTH = 5
 ON_OFF_HYSTERESIS = 5
 SKRIPTPFAD = os.path.abspath(os.path.dirname(__file__))
-factory = PiGPIOFactory()
+factory = LGPIOFactory()
 PWM_FAN = gpiozero.PWMOutputDevice(18, pin_factory=factory)
 TACHO_PIN = gpiozero.Button(23)
 
